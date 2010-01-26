@@ -35,7 +35,7 @@ tests_require=['zope.testing']
 setup(name='osha.fop',
       version=version,
       description="Focal Point specific views, also known as the OSHNetwork section",
-      long_description=long_description
+      long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
