@@ -26,7 +26,7 @@ class OSHNetworkMemberView(BrowserView):
     def __call__(self):
         return self.template()
 
-    def getLocalizedPath(self, path):
+    def get_localized_path(self, path):
         """ A method to prefix a path with the currently selected language
         string """
         context = self.context
@@ -35,7 +35,7 @@ class OSHNetworkMemberView(BrowserView):
         path = path.lstrip("/")
         return "/%s/%s" % (language, path)
 
-    def getNationalFlag(self):
+    def get_national_flag(self):
         context = self.context
         country = context.aq_inner.aq_parent.getId()
         flag = country + "_large.gif"
@@ -47,7 +47,7 @@ class OSHNetworkMemberView(BrowserView):
 
         return flag_tag
 
-    def getNews(self):
+    def get_news(self):
         """ return the brains for relevant news items """
         context = self.context
         catalog = getToolByName(context, 'portal_catalog')
@@ -65,3 +65,9 @@ class OSHNetworkMemberView(BrowserView):
 
         brains = catalog(query)
         return brains
+
+    def get_fop_languages(self):
+        """ Return the languages for the current FOP
+        e.g. For Belgium return "en","nl","fr"
+        """
+        return ["en", "nl", "fr"]

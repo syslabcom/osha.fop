@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:plone="http://namespaces.plone.org/plone">
+
+  <include package="plone.app.portlets" />
+
+  <!-- Network Member Links portlet -->
+  <plone:portlet
+     name="osha.NetworkMemberLinks"
+     interface=".network_member_links.IOSHNetworkMemberLinksPortlet"
+     assignment=".network_member_links.Assignment"
+     renderer=".network_member_links.Renderer"
+     addview=".network_member_links.AddForm"
+     editview=".network_member_links.EditForm"
+     />
+
+</configure>
