@@ -21,7 +21,7 @@ long_description = (
     'Detailed Documentation\n'
     '**********************\n'
     + '\n' +
-    read('src', 'osha', 'theme', 'README.txt')
+    read('README.txt')
     + '\n' +
     'Contributors\n'
     '************\n'
