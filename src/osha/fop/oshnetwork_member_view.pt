@@ -33,9 +33,9 @@
             Title
           </metal:field>
         </h1>
-asdfasdf
+
         <tal:fop_languages repeat="language python:view.get_fop_languages()">
-          <div content="language">Englishasdf</div>
+          <div tal:replace="language">English</div>
         </tal:fop_languages>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />

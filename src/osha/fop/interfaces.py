@@ -1,14 +1,4 @@
-from zope import schema
 from zope.interface import Interface
-from zope.i18nmessageid import MessageFactory
-from zope.viewlet.interfaces import IViewletManager
-
-from plone.app.portlets.interfaces import IColumn
-from plone.theme.interfaces import IDefaultPloneLayer
-from plone.portlets.interfaces import IPortletManager
-
-_ = MessageFactory('osha.theme')
-
 
 class IOSHNetworkMemberView(Interface):
     """Marker interface that defines a Zope 3 skin layer.

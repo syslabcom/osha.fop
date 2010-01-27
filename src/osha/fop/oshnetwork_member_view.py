@@ -1,15 +1,12 @@
 from DateTime import DateTime
 
-from zope.app.component.hooks import getSite
 from zope.interface import implements
-from zope.i18nmessageid import MessageFactory
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 
 from osha.fop.interfaces import IOSHNetworkMemberView
 
-_ = MessageFactory('osha.theme')
 
 class OSHNetworkMemberView(BrowserView):
     implements(IOSHNetworkMemberView)
