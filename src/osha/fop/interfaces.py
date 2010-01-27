@@ -11,7 +11,17 @@ class IOSHNetworkMemberView(Interface):
     def get_news(number_of_items):
         """ return the brains for relevant news items """
 
-    def get_fop_languages(self):
-        """ Return the languages for the current FOP
-        e.g. For Belgium return "en","nl","fr"
+    def get_fop_translations():
+        """
+        Return the available translations for the current context
+
+        {"nl":("Dutch", "http://url",) ...}
+        """
+
+    def get_language_selected(lang):
+        """
+        For use in the selection list:
+
+        Return "selected" if the lang matches the self.Language lang is
+        "en" and self.Language is None.
         """
