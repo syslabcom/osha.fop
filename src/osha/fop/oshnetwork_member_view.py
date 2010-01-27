@@ -7,7 +7,7 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 
-from osha.theme.browser.interfaces import IOSHNetworkMemberView
+from osha.fop.interfaces import IOSHNetworkMemberView
 
 _ = MessageFactory('osha.theme')
 
