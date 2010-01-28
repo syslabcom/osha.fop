@@ -95,9 +95,10 @@ class OSHNetworkMemberView(BrowserView):
                                          name=u'plone_portal_state')
         lang_names = portal_state.locale().displayNames.languages
         for lang_code in translations.keys():
-            available_translations[lang_code] = \
-                (lang_names[lang_code],
-                 translations[lang_code][0].absolute_url(),)
+            if translations[lang_code][1] == "published":
+                available_translations[lang_code] = \
+                    (lang_names[lang_code],
+                     translations[lang_code][0].absolute_url(),)
         return available_translations
 
     def get_language_selected(self, lang):
