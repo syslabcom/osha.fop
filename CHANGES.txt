@@ -3,6 +3,10 @@ osha.fop Changelog
 
 0.5 (2010-01-28)
 ----------------
+- Fix rst (deroiste)
+
+0.5 (2010-01-28)
+----------------
 
 - Initial release. Moved the code from osha.theme relevant to the FOP
   section to this package. (deroiste)
