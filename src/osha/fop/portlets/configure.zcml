@@ -4,10 +4,10 @@
 
   <include package="plone.app.portlets" />
 
-  <!-- Network Member Links portlet -->
+  <!-- FOP Links portlet -->
   <plone:portlet
-     name="osha.FOPLinks"
-     interface=".fop_links.IOSHNetworkMemberLinksPortlet"
+     name="osha.IFOPLinks"
+     interface=".fop_links.IFOPLinksPortlet"
      assignment=".fop_links.Assignment"
      renderer=".fop_links.Renderer"
      addview=".fop_links.AddForm"
