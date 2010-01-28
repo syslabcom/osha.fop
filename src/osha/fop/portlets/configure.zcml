@@ -6,12 +6,12 @@
 
   <!-- Network Member Links portlet -->
   <plone:portlet
-     name="osha.NetworkMemberLinks"
-     interface=".network_member_links.IOSHNetworkMemberLinksPortlet"
-     assignment=".network_member_links.Assignment"
-     renderer=".network_member_links.Renderer"
-     addview=".network_member_links.AddForm"
-     editview=".network_member_links.EditForm"
+     name="osha.FOPLinks"
+     interface=".fop_links.IOSHNetworkMemberLinksPortlet"
+     assignment=".fop_links.Assignment"
+     renderer=".fop_links.Renderer"
+     addview=".fop_links.AddForm"
+     editview=".fop_links.EditForm"
      />
 
 </configure>

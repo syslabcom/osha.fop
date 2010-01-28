@@ -18,24 +18,24 @@ try:
 except ImportError:
     from osha.theme.vocabulary import AnnotatableLinkListVocabulary
 
-class IOSHNetworkMemberLinksPortlet(IPortletDataProvider):
+class IFOPLinksPortlet(IPortletDataProvider):
     pass
 
 class Assignment(base.Assignment):
 
-    implements(IOSHNetworkMemberLinksPortlet)
+    implements(IFOPLinksPortlet)
 
     def __init__(self):
         pass
 
     @property
     def title(self):
-        return "Network Member Links"
+        return "FOP Links"
 
 
 class Renderer(base.Renderer):
 
-    _template = ViewPageTemplateFile('network_member_links.pt')
+    _template = ViewPageTemplateFile('fop_links.pt')
     link_sections = AnnotatableLinkListVocabulary().getDisplayList()
 
     def _render_cachekey(method, self):
@@ -73,7 +73,7 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IOSHNetworkMemberLinksPortlet)
+    form_fields = form.Fields(IFOPLinksPortlet)
 
     def create(self, data):
         return Assignment(**data)
@@ -84,4 +84,4 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IOSHNetworkMemberLinksPortlet)
+    form_fields = form.Fields(IFOPLinksPortlet)
