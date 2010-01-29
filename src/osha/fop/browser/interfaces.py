@@ -11,7 +11,7 @@ class IOSHNetworkMemberView(Interface):
     def get_news(number_of_items):
         """ return the brains for relevant news items """
 
-    def get_fop_translations():
+    def get_available_translations():
         """
         Return the available translations for the current context
 

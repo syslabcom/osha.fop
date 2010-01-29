@@ -2,16 +2,9 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:browser="http://namespaces.zope.org/browser">
 
+  <include package=".browser" />   
   <include package=".portlets" />   
-  <include file="profiles.zcml" />
 
-  <!-- OSHA Network Member -->
-  <browser:page
-     for="*"
-     name="oshnetwork-member-view"
-     class=".oshnetwork_member_view.OSHNetworkMemberView"
-     permission="zope.Public"
-     allowed_interface=".interfaces.IOSHNetworkMemberView"
-     />
+  <include file="profiles.zcml" />
 
 </configure>

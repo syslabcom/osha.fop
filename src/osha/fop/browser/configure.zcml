@@ -1,0 +1,22 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser">
+
+  <!-- OSHA Network Member -->
+  <browser:page
+     for="*"
+     name="oshnetwork-member-view"
+     class=".oshnetwork_member_view.OSHNetworkMemberView"
+     permission="zope.Public"
+     allowed_interface=".interfaces.IOSHNetworkMemberView"
+     />
+
+  <browser:viewlet
+     name="morelanguages.dropdown"
+     for=".interfaces.IOSHNetworkMemberView"
+     manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
+     class=".viewlets.MoreLanguagesViewlet"
+     permission="zope2.View"
+     />
+
+</configure>

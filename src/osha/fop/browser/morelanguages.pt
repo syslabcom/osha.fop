@@ -1,0 +1,19 @@
+<div id="available-translations" tal:define="translations view/get_available_translations"
+     tal:condition="python:len(translations) > 1">
+  <span i18n:translate="select_available_translations">Additional translations:</span>
+  <form action="">
+    <select 
+       onchange="window.location= this.options[this.selectedIndex].getAttributeNode('url').value"
+       >
+      <option value="de" url="/de/this/url"
+              tal:repeat="lang_code translations/keys"
+              tal:attributes="value lang_code;
+                              url python:translations[lang_code][1];
+                              selected python:view.get_language_selected(lang_code)"
+              tal:content="python:translations[lang_code][0]">
+        German
+      </option>
+    </select>
+  </form>
+</div>
+
