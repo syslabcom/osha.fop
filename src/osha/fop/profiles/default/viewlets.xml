@@ -2,6 +2,6 @@
 <object>
   <order manager="osha.header.dropdowns" skinname="*"
          based-on="Plone Default">
-    <viewlet name="example.credits" />
+    <viewlet name="morelanguages.dropdown" />
   </order>
 </object>
