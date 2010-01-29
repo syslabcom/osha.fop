@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object>
+  <order manager="osha.header.dropdowns" skinname="*"
+         based-on="Plone Default">
+    <viewlet name="example.credits" />
+  </order>
+</object>
