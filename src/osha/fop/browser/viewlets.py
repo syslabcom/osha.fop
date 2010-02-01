@@ -5,11 +5,11 @@ FOP/OSHA Network Member specific viewlets
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.LinguaPlone.interfaces import ITranslatable
-from plone.app.layout.viewlets.common import ViewletBase
 from zope.component import queryMultiAdapter
 
+from osha.theme.browser.viewlets import OSHALanguageSelector
 
-class MoreLanguagesViewlet(ViewletBase):
+class MoreLanguagesViewlet(OSHALanguageSelector):
     """
     Methods to get the available translations of the current object
     which aren't included in the global language selection tool.
