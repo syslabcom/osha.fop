@@ -13,7 +13,6 @@
 
   <browser:viewlet
      name="morelanguages.dropdown"
-     for=".interfaces.IOSHNetworkMemberView"
      manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
      class=".viewlets.MoreLanguagesViewlet"
      permission="zope2.View"
