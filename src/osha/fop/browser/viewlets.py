@@ -34,7 +34,8 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
         portal_state = queryMultiAdapter((context, self.request),
                                          name=u'plone_portal_state')
         lang_names = portal_state.locale().displayNames.languages
-        lang_codes = [i for i in translations.keys() if i not in portal_langs]
+        lang_codes = [i for i in translations.keys() if i not in portal_langs
+            and i != ""]
         for lang_code in lang_codes:
             if translations[lang_code][1] == "published":
                 available_translations[lang_code] = \
