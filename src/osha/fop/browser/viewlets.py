@@ -2,7 +2,6 @@
 FOP/OSHA Network Member specific viewlets
 """
 
-from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.LinguaPlone.interfaces import ITranslatable
 from zope.component import queryMultiAdapter
@@ -23,8 +22,7 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
         {"nl":("Dutch", "http://url",) ...}
         """
         context = self.context
-        ltool = getToolByName(context, "portal_languages")
-        portal_langs = ltool.getSupportedLanguages()
+        portal_langs = [i["code"] for i in self.languages()]
 
         translatable = ITranslatable(context, None)
         if translatable is not None:
@@ -33,7 +31,7 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
             translations = {}
 
         available_translations = {}
-        portal_state = queryMultiAdapter((self.context, self.request),
+        portal_state = queryMultiAdapter((context, self.request),
                                          name=u'plone_portal_state')
         lang_names = portal_state.locale().displayNames.languages
         lang_codes = [i for i in translations.keys() if i not in portal_langs]
