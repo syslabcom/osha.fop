@@ -34,25 +34,6 @@
           </metal:field>
         </h1>
 
-        <!--div id="fop-translations" tal:define="translations view/get_fop_translations"
-                tal:condition="translations">
-        <span i18n:translate="select_available_translations">Read this content in any of the following languages:</span>
-        <form action="">
-          <select 
-             onchange="window.location= this.options[this.selectedIndex].getAttributeNode('url').value"
-             >
-            <option value="de" url="/de/this/url"
-                    tal:repeat="lang_code translations/keys"
-                    tal:attributes="value lang_code;
-                                    url python:translations[lang_code][1];
-                                    selected python:view.get_language_selected(lang_code)"
-                    tal:content="python:translations[lang_code][0]">
-              German
-            </option>
-          </select>
-        </form>
-        </div-->
-
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <p class="documentDescription">
