@@ -45,7 +45,7 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
                 )
 
         for lang_code in lang_codes:
-            is_published = translations[lang_code][1]
+            is_published = translations[lang_code][1] == "published"
             if can_edit or is_published:
                 additional_translations[lang_code] = \
                     (lang_names[lang_code],
