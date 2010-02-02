@@ -1,4 +1,7 @@
 from zope.interface import Interface
+from osha.theme.browser.interfaces import IThemeSpecific
+from plone.theme.interfaces import IDefaultPloneLayer
+
 
 class IOSHNetworkMemberView(Interface):
     """Marker interface that defines a Zope 3 skin layer.
@@ -25,3 +28,7 @@ class IOSHNetworkMemberView(Interface):
         Return "selected" if the lang matches the self.Language lang is
         "en" and self.Language is None.
         """
+
+class IFOPSpecific(IDefaultPloneLayer):
+    """Marker interface that defines a Zope 3 skin layer.
+    """

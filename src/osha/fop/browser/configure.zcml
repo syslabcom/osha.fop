@@ -15,7 +15,15 @@
      name="morelanguages.dropdown"
      manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
      class=".viewlets.MoreLanguagesViewlet"
+     layer=".interfaces.IFOPSpecific"
      permission="zope2.View"
+     />
+
+  <!-- 'OSHA Plone Theme' Zope 3 skin layer -->
+  <interface
+     interface=".interfaces.IFOPSpecific"
+     type="zope.publisher.interfaces.browser.IBrowserSkinType"
+     name="OSHA FOP skin"
      />
 
 </configure>

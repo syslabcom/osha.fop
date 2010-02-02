@@ -1,0 +1,7 @@
+<layers>
+
+  <layer name="osha.fop.layer"
+         interface="osha.fop.browser.interfaces.IFOPSpecific"
+         />
+
+</layers>
