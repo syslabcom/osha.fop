@@ -2,6 +2,8 @@
 FOP/OSHA Network Member specific viewlets
 """
 
+from AccessControl import getSecurityManager
+from Products.CMFCore import permissions
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.LinguaPlone.interfaces import ITranslatable
 from zope.component import queryMultiAdapter
@@ -37,8 +39,14 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
         lang_names = portal_state.locale().displayNames.languages
         lang_codes = [i for i in translations.keys() if i not in portal_langs
             and i != ""]
+        can_edit = getSecurityManager().checkPermission(
+                permissions.ModifyPortalContent,
+                context
+                )
+
         for lang_code in lang_codes:
-            if translations[lang_code][1] == "published":
+            is_published = translations[lang_code][1]
+            if can_edit or is_published:
                 additional_translations[lang_code] = \
                     (lang_names[lang_code],
                      translations[lang_code][0].absolute_url(),)
