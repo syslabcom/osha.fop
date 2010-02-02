@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<object name="portal_skins" allow_any="False" cookie_persistence="False"
-   default_skin="OSHA FOP skin">
- <skin-path name="OSHA Plone Theme" based-on="OSHA Plone Theme">
- </skin-path>
+<object name="portal_skins" allow_any="False" cookie_persistence="False">
+
+  <skin-path name="OSHA FOP skin" based-on="OSHA Plone Theme">
+  </skin-path>
+
 </object>

@@ -15,11 +15,12 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
     """
     render = ViewPageTemplateFile('morelanguages.pt')
 
-    def get_available_translations(self):
+    def get_additional_translations(self):
         """
-        Return the available translations for the current context
+        Return translations for the current context which aren't
+        available from the language selection drop down
 
-        {"nl":("Dutch", "http://url",) ...}
+        {"tr":("Turkish", "http://url",) ...}
         """
         context = self.context
         portal_langs = [i["code"] for i in self.languages()]
@@ -30,7 +31,7 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
         else:
             translations = {}
 
-        available_translations = {}
+        additional_translations = {}
         portal_state = queryMultiAdapter((context, self.request),
                                          name=u'plone_portal_state')
         lang_names = portal_state.locale().displayNames.languages
@@ -38,10 +39,10 @@ class MoreLanguagesViewlet(OSHALanguageSelector):
             and i != ""]
         for lang_code in lang_codes:
             if translations[lang_code][1] == "published":
-                available_translations[lang_code] = \
+                additional_translations[lang_code] = \
                     (lang_names[lang_code],
                      translations[lang_code][0].absolute_url(),)
-        return available_translations
+        return additional_translations
 
     def get_language_selected(self, lang):
         """

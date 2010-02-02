@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object>
-  <order manager="osha.header.dropdowns" skinname="*"
+  <order manager="osha.header.dropdowns" skinname="OSHA FOP skin"
          based-on="Plone Default">
     <viewlet name="morelanguages.dropdown" />
   </order>

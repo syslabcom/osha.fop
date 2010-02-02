@@ -1,5 +1,4 @@
 from zope.interface import Interface
-from osha.theme.browser.interfaces import IThemeSpecific
 from plone.theme.interfaces import IDefaultPloneLayer
 
 
@@ -14,11 +13,12 @@ class IOSHNetworkMemberView(Interface):
     def get_news(number_of_items):
         """ return the brains for relevant news items """
 
-    def get_available_translations():
+    def get_additional_translations():
         """
-        Return the available translations for the current context
+        Return translations for the current context which aren't
+        available from the language selection drop down
 
-        {"nl":("Dutch", "http://url",) ...}
+        {"tr":("Turkish", "http://url",) ...}
         """
 
     def get_language_selected(lang):
