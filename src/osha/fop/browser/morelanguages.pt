@@ -25,7 +25,8 @@
     <select 
        onchange="window.location= this.options[this.selectedIndex].getAttributeNode('url').value"
        >
-      <option value="#" url="#">Additional translations</option>
+      <option value="#" url="#"
+              i18n:translate="select_additional_translations">Additional translations</option>
       <option value="de" url="/de/this/url"
               tal:repeat="lang_code translations/keys"
               tal:attributes="value lang_code;
