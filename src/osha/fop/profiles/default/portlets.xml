@@ -3,8 +3,8 @@
 <portlets>  
   
   <portlet
-     addview="osha.NetworkMemberLinks"
-     title="Network Member Links"
+     addview="osha.FOPLinks"
+     title="FOP Links"
      description="Additional categorised links with a special layout for a
                   particular country page." />  
   

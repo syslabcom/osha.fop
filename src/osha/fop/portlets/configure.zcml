@@ -6,7 +6,7 @@
 
   <!-- FOP Links portlet -->
   <plone:portlet
-     name="osha.IFOPLinks"
+     name="osha.FOPLinks"
      interface=".fop_links.IFOPLinksPortlet"
      assignment=".fop_links.Assignment"
      renderer=".fop_links.Renderer"
