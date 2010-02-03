@@ -1,7 +1,15 @@
 osha.fop Changelog
 ==================
 
-0.5 (2010-01-28)
+0.7 (2010-02-03)
+----------------
+
+- Finalised functionality of the additional languages viewlet (deroiste)
+
+- Renamed the Network Member Links portlet to FOP Links portlet so
+  that the old version from osha.theme can be replaced (deroiste)
+
+0.6 (2010-01-28)
 ----------------
 - Fix rst (deroiste)
 
