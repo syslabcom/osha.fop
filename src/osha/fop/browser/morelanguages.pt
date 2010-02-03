@@ -2,6 +2,8 @@
      tal:condition="python:len(translations)">
 
   <tal:links condition="python:len(translations) < 3">
+    <!-- As a visitor I see links to the additional published
+    translations -->
     <span i18n:translate="select_additional_translations">Additional translations</span>
 
     <tal:translations repeat="lang_code translations/keys">
@@ -20,8 +22,11 @@
 
   </tal:links>
 
+
   <form action="" 
         tal:condition="python:len(translations) > 2">
+    <!-- As a manager I can select a translation from all the
+    available additional translations so that I can edit them -->
     <select 
        onchange="window.location= this.options[this.selectedIndex].getAttributeNode('url').value"
        >
@@ -36,5 +41,7 @@
         German
       </option>
     </select>
+
   </form>
+
 </div>
