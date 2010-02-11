@@ -1,0 +1,17 @@
+<dl id="fop-links" class="portlet portletDocumentFallback"
+    i18n:domain="osha">
+  <dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+    <span class="tile" 
+          content="view/heading_focal_point">
+      Belgian Focal Point
+    </span>
+    <span class="portletTopRight"></span>
+  </dt>
+  <dd class="portletItem">
+    <a href="http://url" 
+       tal:attributes="href view/url"
+       i18n:translate="label_main_fop_website">Visit the main website</a>
+  </dd>
+</dl>
+

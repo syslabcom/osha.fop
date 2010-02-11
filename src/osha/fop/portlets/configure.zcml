@@ -14,4 +14,14 @@
      editview=".fop_links.EditForm"
      />
 
+  <!-- FOP main site promotion portlet -->
+  <plone:portlet
+     name="osha.FOPMainPromotion"
+     interface=".fop_main_promotion.IFOPMainPromotionPortlet"
+     assignment=".fop_main_promotion.Assignment"
+     renderer=".fop_main_promotion.Renderer"
+     addview=".fop_main_promotion.AddForm"
+     editview=".fop_main_promotion.EditForm"
+     />
+
 </configure>
