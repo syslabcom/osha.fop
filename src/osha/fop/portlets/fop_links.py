@@ -42,7 +42,7 @@ class Renderer(base.Renderer):
         preflang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
         return (preflang)
         
-    #@ram.cache(_render_cachekey)
+    @ram.cache(_render_cachekey)
     def render(self):
         return self._template()
 
