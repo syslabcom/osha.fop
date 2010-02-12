@@ -56,7 +56,7 @@ class Renderer(base.Renderer):
         return "http://www.member-state.eu"
 
     #@memoize
-    def heading_focal_point(self)@:
+    def heading_focal_point(self):
         """
         Return the a heading for this focal point in the current
         language.
