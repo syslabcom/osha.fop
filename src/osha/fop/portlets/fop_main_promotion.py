@@ -11,7 +11,7 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.instance import memoize
-from plone.memoize.instance import ram
+from plone.memoize import ram
 from plone.app.portlets.portlets import base
 
 
@@ -46,7 +46,7 @@ class Renderer(base.Renderer):
             ).getPreferredLanguage()
         return (preflang)
 
-    #@ram.cache(_render_cachekey)
+    @ram.cache(_render_cachekey)
     def render(self):
         return self._template()
 
