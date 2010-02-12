@@ -3,30 +3,44 @@ Some Focal Points have a full subsite in addition to this FOP
 section. This portlet provides a link to such a site.
 """
 
-from zope.interface import implements
+from zope import schema
+from zope.component import getMultiAdapter
 from zope.formlib import form
+from zope.interface import implements
 
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.portlets.constants import CONTEXT_CATEGORY
 
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.memoize.instance import memoize
-from plone.memoize import ram
 from plone.app.portlets.portlets import base
+from plone.app.portlets.utils import assignment_mapping_from_key
+from plone.memoize import ram
+from plone.memoize.instance import memoize
+from plone.portlets.interfaces import IPortletDataProvider
 
 
 class IFOPMainPromotionPortlet(IPortletDataProvider):
-    pass
+    """
+    The url to the main Focal Point site is set on the portlet in the
+    canonical translation.
+    """
+    url = schema.TextLine(
+        title=_(u'URL of the Main Site for this Focal Point'),
+        description=_(
+        u"""Enter the url to the main Focal Point site for this member
+        state"""),
+        required=True,
+        )
 
 class Assignment(base.Assignment):
     """
     Configuration class
     """
-
     implements(IFOPMainPromotionPortlet)
 
-    def __init__(self):
-        pass
+    def __init__(self, url):
+        self.url = url
 
     @property
     def title(self):
@@ -53,8 +67,25 @@ class Renderer(base.Renderer):
     def url(self):
         """
         Return the url to the main FOP site for this member state
+
+        This is set on the canonical member state only
         """
-        return "http://www.member-state.eu"
+        context = self.context
+        request = self.request
+        osha_view = getMultiAdapter((context, request), name=u'oshaview')
+        subsite_root = context.restrictedTraverse(osha_view.subsiteRootPath())
+        canonical_member_state = subsite_root.getCanonical()
+        path = canonical_member_state.virtual_url_path()
+        try:
+            right_portlets = assignment_mapping_from_key(
+                canonical_member_state, 'plone.rightcolumn', CONTEXT_CATEGORY,
+                "/".join(canonical_member_state.getPhysicalPath())
+                )
+        except ComponentLookupError:
+            return
+        if "fop-main-site" in right_portlets.keys():
+            return right_portlets["fop-main-site"].url
+
 
     #@memoize
     def heading_focal_point(self):
@@ -83,3 +114,5 @@ class EditForm(base.EditForm):
     zope.formlib which fields to display.
     """
     form_fields = form.Fields(IFOPMainPromotionPortlet)
+    label = _(u"Edit FOP Main Site Portlet")
+    description = _(u"This portlet displays a link to the main FOP site.")
