@@ -11,6 +11,7 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.instance import memoize
+from plone.memoize.instance import ram
 from plone.app.portlets.portlets import base
 
 

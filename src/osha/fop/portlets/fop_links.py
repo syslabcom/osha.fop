@@ -6,6 +6,7 @@ from Products.CMFCore.utils import getToolByName
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.instance import memoize
+from plone.memoize.instance import ram
 from plone.app.portlets.portlets import base
 
 try:
@@ -41,7 +42,7 @@ class Renderer(base.Renderer):
     def _render_cachekey(method, self):
         preflang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
         return (preflang)
-        
+
     @ram.cache(_render_cachekey)
     def render(self):
         return self._template()
@@ -52,7 +53,7 @@ class Renderer(base.Renderer):
         context = self.context
         return IAnnotatedLinkList.providedBy(context) and \
             context.Schema().getField('annotatedlinklist').get(context)
-        
+
     @memoize
     def get_links_by_section(self, section):
         context = self.context
