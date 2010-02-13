@@ -75,7 +75,6 @@ class Renderer(base.Renderer):
         osha_view = getMultiAdapter((context, request), name=u'oshaview')
         subsite_root = context.restrictedTraverse(osha_view.subsiteRootPath())
         canonical_member_state = subsite_root.getCanonical()
-        path = canonical_member_state.virtual_url_path()
         try:
             right_portlets = assignment_mapping_from_key(
                 canonical_member_state, 'plone.rightcolumn', CONTEXT_CATEGORY,

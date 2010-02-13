@@ -26,4 +26,15 @@
      name="OSHA FOP skin"
      />
 
+  <!-- Customising the link to edit portlets so that it isn't possible
+  on translations --> 
+  <browser:page 
+     for="*" 
+     name="manage-portlets-macros"
+     class="plone.app.portlets.browser.manage.ManageContextualPortlets"
+     template="templates/edit-manager-macros.pt"
+     permission="plone.app.portlets.ManageOwnPortlets"
+     layer=".interfaces.IFOPSpecific"
+     />
+
 </configure>
