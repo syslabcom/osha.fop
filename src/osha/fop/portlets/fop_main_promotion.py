@@ -11,6 +11,7 @@ from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PlacelessTranslationService import getTranslationService
 from plone.portlets.constants import CONTEXT_CATEGORY
 
 from plone.app.portlets.portlets import base
@@ -74,7 +75,7 @@ class Renderer(base.Renderer):
         request = self.request
         osha_view = getMultiAdapter((context, request), name=u'oshaview')
         subsite_root = context.restrictedTraverse(osha_view.subsiteRootPath())
-        canonical_member_state = subsite_root.getCanonical()
+        canonical_member_state = self.subsite_root.getCanonical()
         try:
             right_portlets = assignment_mapping_from_key(
                 canonical_member_state, 'plone.rightcolumn', CONTEXT_CATEGORY,
@@ -86,13 +87,30 @@ class Renderer(base.Renderer):
             return right_portlets["fop-main-site"].url
 
 
-    #@memoize
-    def heading_focal_point(self):
+    @memoize
+    def heading_main_fop_portlet(self):
         """
         Return the a heading for this focal point in the current
         language.
         """
-        return "Belgian Focal Point"
+        context = self.context
+        request = self.request
+        osha_view = getMultiAdapter((context, request), name=u'oshaview')
+        subsite_root = context.restrictedTraverse(osha_view.subsiteRootPath())
+        preflang = getToolByName(
+            context, 'portal_languages'
+            ).getPreferredLanguage()
+        translate = getTranslationService().translate
+        msgid = "heading_main_fop_portlet_%s" % subsite_root.getId()
+        heading = translate(
+            target_language=preflang,
+            msgid=msgid,
+            default="Main Focal Point",
+            context=context,
+            domain="osha"
+            )
+        return heading
+
 
 class AddForm(base.AddForm):
     """ Portlet add form.
