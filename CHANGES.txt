@@ -1,6 +1,11 @@
 osha.fop Changelog
 ==================
 
+0.8 (2010-03-09)
+----------------
+
+- Added the FOP Main Site promotion portlet (deroiste)
+
 0.7 (2010-02-03)
 ----------------
 
