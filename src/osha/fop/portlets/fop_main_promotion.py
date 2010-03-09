@@ -20,6 +20,7 @@ from plone.memoize import ram
 from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 
+from slc.subsite.interfaces import ISubsiteEnhanced
 
 class IFOPMainPromotionPortlet(IPortletDataProvider):
     """
@@ -75,6 +76,12 @@ class Renderer(base.Renderer):
         request = self.request
         osha_view = getMultiAdapter((context, request), name=u'oshaview')
         subsite_root = context.restrictedTraverse(osha_view.subsiteRootPath())
+
+        # if the context isn't a subsite then subsite_root will be the
+        # portal root
+        if not ISubsiteEnhanced.providedBy(subsite_root):
+            return
+
         canonical_member_state = subsite_root.getCanonical()
         try:
             right_portlets = assignment_mapping_from_key(
@@ -87,7 +94,7 @@ class Renderer(base.Renderer):
             return right_portlets["fop-main-site"].url
 
 
-    @memoize
+    #@memoize
     def heading_main_fop_portlet(self):
         """
         Return the a heading for this focal point in the current

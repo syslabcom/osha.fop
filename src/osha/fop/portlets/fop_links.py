@@ -54,7 +54,6 @@ class Renderer(base.Renderer):
         return IAnnotatedLinkList.providedBy(context) and \
             context.Schema().getField('annotatedlinklist').get(context)
 
-    @memoize
     def get_links_by_section(self, section):
         context = self.context
         if IAnnotatedLinkList.providedBy(self.context):
