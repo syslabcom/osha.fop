@@ -32,7 +32,7 @@ class IFOPMainPromotionPortlet(IPortletDataProvider):
         description=_(
         u"""Enter the url to the main Focal Point site for this member
         state"""),
-        required=True,
+        required=False,
         )
 
 class Assignment(base.Assignment):
