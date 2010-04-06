@@ -43,7 +43,8 @@ class Renderer(base.Renderer):
         preflang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
         return (preflang)
 
-    @ram.cache(_render_cachekey)
+    # @ram.cache(_render_cachekey)
+    # TODO using the language only as a cache key isn't sufficient
     def render(self):
         return self._template()
 
