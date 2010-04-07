@@ -1,10 +1,10 @@
 osha.fop Changelog
 ==================
 
-0.10 (unreleased)
+1.0 (2010-04-07)
 -----------------
 
-- Nothing changed yet.
+- Translating FOP Link Section headings (deroiste)
 
 
 0.9 (2010-04-06)
