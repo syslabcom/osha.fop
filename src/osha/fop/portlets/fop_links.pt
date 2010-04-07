@@ -1,25 +1,29 @@
-<span tal:condition="view/has_links"
-    tal:omit-tag="">
-
-    <dl id="fop-links" class="portlet portletDocumentFallback"
-        i18n:domain="osha">
-        <span tal:repeat="section view/link_sections/items"
-            tal:omit-tag="">
-            <dt class="portletHeader" 
-                tal:condition="python:view.get_links_by_section(section[0])">
-                <span class="portletTopLeft"></span>
-                <span class="tile" tal:content="python:section[1]">
-                    Link Section 1
-                </span>
-                <span class="portletTopRight"></span>
-            </dt>
-            <dd class="portletItem" 
-                tal:repeat="link python:view.get_links_by_section(section[0])">
-                <a href="http://url" 
-                    tal:attributes="href link/url; 
-                    title link/title"
-                    tal:content="link/linktext">Link Title</a>
-            </dd>
-        </span>
-    </dl>
-</span>
+<tal:has_links condition="view/has_links">
+  <dl id="fop-links" class="portlet portletDocumentFallback"
+      i18n:domain="osha">
+    <tal:link_sections
+       define="link_sections python:view.link_sections()"
+       repeat="section python:link_sections.keys()"
+       >
+      <tal:links
+         define="links python:view.get_links_by_section(section)"
+         >
+        <dt class="portletHeader" 
+            tal:condition="links">
+          <span class="portletTopLeft"></span>
+          <span class="tile" tal:content="python:link_sections[section]">
+            Link Section 1
+          </span>
+          <span class="portletTopRight"></span>
+        </dt>
+        <dd class="portletItem" 
+            tal:repeat="link links">
+          <a href="http://url" 
+             tal:attributes="href link/url; 
+                             title link/title"
+             tal:content="link/linktext">Link Title</a>
+        </dd>
+      </tal:links>
+    </tal:link_sections>
+  </dl>
+</tal:has_links>

@@ -1,8 +1,9 @@
 from zope.interface import implements
 from zope.formlib import form
 
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.PlacelessTranslationService import getTranslationService
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.instance import memoize
@@ -37,7 +38,35 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
 
     _template = ViewPageTemplateFile('fop_links.pt')
-    link_sections = AnnotatableLinkListVocabulary().getDisplayList()
+
+    def link_sections(self):
+        sectionid2msgid_map = {
+            "authorities": "heading_authorities",
+            "social_partners": "heading_social_partners",
+            "other_national": "heading_other_national_sites",
+            "research_organisations": "heading_research_organisations",
+            "more": "heading_more_related_content",
+            }
+        link_section_dict = {}
+        preflang = getToolByName(
+            self.context, 'portal_languages'
+            ).getPreferredLanguage()
+        translate = getTranslationService().translate
+        section_ids = dict(
+            AnnotatableLinkListVocabulary().getDisplayList().items()
+            )
+
+        for id in section_ids.keys():
+            msgid = sectionid2msgid_map[id]
+            heading = translate(
+                target_language=preflang,
+                msgid=msgid,
+                default=section_ids[id],
+                context=self.context,
+                domain="osha"
+                )
+            link_section_dict[id] = heading
+        return link_section_dict
 
     def _render_cachekey(method, self):
         preflang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
