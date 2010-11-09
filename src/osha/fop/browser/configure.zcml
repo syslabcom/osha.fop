@@ -11,13 +11,14 @@
      allowed_interface=".interfaces.IOSHNetworkMemberView"
      />
 
-  <browser:viewlet
-     name="morelanguages.dropdown"
-     manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
-     class=".viewlets.MoreLanguagesViewlet"
-     layer=".interfaces.IFOPSpecific"
-     permission="zope2.View"
-     />
+  <!-- Overriding the osha.theme languageselector with this custom
+       version. If a language which isn't registered in the portal
+       languages is selected then the drop down list shows "--"
+       instead of the preferred language -->
+  <browser:viewlet name="osha.languageselector"
+       manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
+       class=".viewlets.MoreLanguagesViewlet"
+       layer=".interfaces.IFOPSpecific" permission="zope2.View" />
 
   <!-- 'OSHA Plone Theme' Zope 3 skin layer -->
   <interface
