@@ -1,6 +1,12 @@
 osha.fop Changelog
 ==================
 
+1.1 (2010-11-09)
+----------------
+
+- Now overriding the global osha.languageselector instead of just
+  adding the additional languages viewlet. Fixes #1092 (deroiste)
+
 1.0 (2010-04-07)
 -----------------
 
