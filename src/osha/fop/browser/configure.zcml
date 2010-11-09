@@ -13,7 +13,7 @@
 
   <!-- Overriding the osha.theme languageselector with this custom
        version. If a language which isn't registered in the portal
-       languages is selected then the drop down list shows "--"
+       languages is selected then the drop down list shows 2 dashes
        instead of the preferred language -->
   <browser:viewlet name="osha.languageselector"
        manager="osha.theme.browser.interfaces.IOSHAHeaderDropdowns"
