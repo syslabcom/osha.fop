@@ -3,12 +3,12 @@ from zope.formlib import form
 
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.PlacelessTranslationService import getTranslationService
 
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.memoize.instance import memoize
 from plone.memoize import ram
 from plone.app.portlets.portlets import base
+from zope.i18n import translate
 
 try:
     from osha.adaptation.subtyper import IAnnotatedLinkList
@@ -51,7 +51,6 @@ class Renderer(base.Renderer):
         preflang = getToolByName(
             self.context, 'portal_languages'
             ).getPreferredLanguage()
-        translate = getTranslationService().translate
         section_ids = dict(
             AnnotatableLinkListVocabulary().getDisplayList().items()
             )

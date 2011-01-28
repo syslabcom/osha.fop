@@ -11,7 +11,7 @@ from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.PlacelessTranslationService import getTranslationService
+from zope.i18n import translate
 from plone.portlets.constants import CONTEXT_CATEGORY
 
 from plone.app.portlets.portlets import base
@@ -108,7 +108,6 @@ class Renderer(base.Renderer):
         preflang = getToolByName(
             context, 'portal_languages'
             ).getPreferredLanguage()
-        translate = getTranslationService().translate
         msgid = "heading_main_fop_portlet_%s" % subsite_root.getId()
         heading = translate(
             target_language=preflang,
