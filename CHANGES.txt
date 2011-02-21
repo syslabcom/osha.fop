@@ -1,7 +1,7 @@
 osha.fop Changelog
 ==================
 
-1.2 (unreleased)
+1.2 (2011-02-21)
 ----------------
 
 - replaced getTranslationService().translate with zope.i18n.translate [thomasw]
