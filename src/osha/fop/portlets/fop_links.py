@@ -1,24 +1,15 @@
 from zope.interface import implements
 from zope.formlib import form
+from zope.i18n import translate
 
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from plone.portlets.interfaces import IPortletDataProvider
-from plone.memoize.instance import memoize
-from plone.memoize import ram
 from plone.app.portlets.portlets import base
-from zope.i18n import translate
 
-try:
-    from osha.adaptation.subtyper import IAnnotatedLinkList
-except ImportError:
-    from osha.policy.adapter.subtyper import IAnnotatedLinkList
-
-try:
-    from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
-except ImportError:
-    from osha.theme.vocabulary import AnnotatableLinkListVocabulary
+from osha.adaptation.subtyper import IAnnotatedLinkList
+from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
 
 class IFOPLinksPortlet(IPortletDataProvider):
     pass
