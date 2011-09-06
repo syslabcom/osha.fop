@@ -18,18 +18,17 @@ class OSHNetworkMemberView(BrowserView):
     """
     implements(IOSHNetworkMemberView)
 
-    template = ViewPageTemplateFile("oshnetwork_member_view.pt")
-    template.id = "oshnetwork-member-view"
-
     def __init__(self, context, request):
         self.context = context
         self.request = request
         self.result = []
         self.request.set('disable_border', True)
 
+    def getName(self):
+        return self.__name__
 
     def __call__(self):
-        return self.template()
+        return self.index()
 
     def get_localized_path(self, path):
         """

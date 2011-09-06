@@ -6,6 +6,7 @@
   <browser:page
      for="*"
      name="oshnetwork-member-view"
+     template="oshnetwork_member_view.pt"
      class=".oshnetwork_member_view.OSHNetworkMemberView"
      permission="zope.Public"
      allowed_interface=".interfaces.IOSHNetworkMemberView"

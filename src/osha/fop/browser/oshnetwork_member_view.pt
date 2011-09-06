@@ -11,7 +11,7 @@
       <tal:main-macro metal:define-macro="main"
                       tal:define="kssClassesView context/@@kss_field_decorator_view;
                                   getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                                  templateId template/getId;
+                                  templateId view/getName;
                                   text here/getText | python:None;
                                   isEditor python:member.has_permission('Modify portal content', here);">
 
