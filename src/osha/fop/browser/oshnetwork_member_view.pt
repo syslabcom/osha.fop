@@ -12,8 +12,9 @@
                       tal:define="kssClassesView context/@@kss_field_decorator_view;
                                   getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                                   templateId view/getName;
+                                  is_editable context/@@plone_context_state/is_editable;
                                   text here/getText | python:None;
-				  member context/@@plone_portal_state/member;
+                                  member context/@@plone_portal_state/member;
                                   isEditor python:member.has_permission('Modify portal content', here);">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
