@@ -1,5 +1,4 @@
-import unittest
-import doctest
+import unittest2 as unittest
 
 from zope.component import getUtility, getMultiAdapter
 
@@ -8,32 +7,27 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletRenderer
-
 from plone.app.portlets.storage import PortletAssignmentMapping
 
-from osha.fop import oshnetwork_member_view
-from osha.fop.tests.base import OshaFopTestCase
+from osha.fop.tests.base import INTEGRATION_TESTING
 from osha.fop.portlets import network_member_links
 
-class TestView(OshaFopTestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager', ))
+class TestView(unittest.TestCase):
 
-    def populateSite(self):
-        """ Populate the test site with some content. """
+    layer = INTEGRATION_TESTING
 
-        self.portal.invokeFactory("Folder", "en")
-        self.portal.en.invokeFactory("Folder", "belgium")
-        self.portal.en.belgium.invokeFactory("Document", "index_html")
-        ltool = self.portal.portal_languages
-        ltool.addSupportedLanguage('nl')
+    def setUp(self):
+        self.portal = self.layer['portal']
 
     def test_view_methods(self):
         """ Test the methods in the oshnetwork-member-view class """
-        self.populateSite()
 
-        view = self.portal.en.belgium.index_html.restrictedTraverse("@@oshnetwork-member-view")
+        ltool = self.portal.portal_languages
+        ltool.addSupportedLanguage('nl')
+
+        view = self.portal.en.belgium.index_html.restrictedTraverse(
+            "@@oshnetwork-member-view")
         view.context.setLanguage('en')
         localized_path = view.getLocalizedPath("asdf")
         self.assertEquals(localized_path,
@@ -45,10 +39,13 @@ class TestView(OshaFopTestCase):
         self.assertEquals(localized_path,
                           "/nl/asdf")
 
-class TestPortlet(OshaFopTestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager', ))
+class TestPortlet(unittest.TestCase):
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
 
     def test_portlet_type_registered(self):
         portlet = getUtility(
@@ -99,9 +96,9 @@ class TestPortlet(OshaFopTestCase):
             (context, request, view, manager, assignment), IPortletRenderer)
         self.failUnless(isinstance(renderer, network_member_links.Renderer))
 
+
 def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestView))
-    suite.addTest(makeSuite(TestPortlet))
-    return suite
+    """This sets up a test suite that actually runs the tests in
+    the class(es) above.
+    """
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)

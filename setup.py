@@ -27,10 +27,8 @@ long_description = (
     '************\n'
     + '\n' +
     read('CONTRIBUTORS.txt')
-    + '\n' 
+    + '\n'
     )
-
-tests_require=['zope.testing']
 
 setup(name='osha.fop',
       version=version,
@@ -53,7 +51,7 @@ setup(name='osha.fop',
       url='https://svn.syslab.com/svn/OSHA/osha.fop',
       license='GPL + EUPL',
       packages=['osha', 'osha/fop'],
-      package_dir={"" : "src"},
+      package_dir={"": "src"},
       namespace_packages=['osha'],
       include_package_data=True,
       zip_safe=False,
@@ -61,9 +59,12 @@ setup(name='osha.fop',
           'setuptools',
           'osha.policy',
       ],
-      tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
-      test_suite = 'osha.fop.tests.test_suite',
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'mock',
+          ],
+      },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone

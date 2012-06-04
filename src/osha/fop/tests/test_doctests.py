@@ -1,20 +1,20 @@
 import doctest
-import unittest
+import unittest2 as unittest
 
-from base import OshaFopFunctionalTestCase
-
-from Testing.ZopeTestCase import FunctionalDocFileSuite as Suite
+from osha.fop.tests.base import FUNCTIONAL_TESTING
+from plone.testing import layered
 
 OPTIONFLAGS = (doctest.REPORT_ONLY_FIRST_FAILURE |
                doctest.ELLIPSIS |
                doctest.NORMALIZE_WHITESPACE)
 
+
 def test_suite():
-    return unittest.TestSuite((
-
-            Suite('tests/oshnetwork_member_view.txt',
-                   optionflags=OPTIONFLAGS,
-                   package='osha.fop',
-                   test_class=OshaFopFunctionalTestCase) ,
-
-        ))
+    suite  = unittest.TestSuite()
+    suite.addTests([
+            layered(
+                doctest.DocFileSuite(
+                    "oshnetwork_member_view.txt", optionflags=OPTIONFLAGS),
+                layer=FUNCTIONAL_TESTING),
+            ])
+    return suite
