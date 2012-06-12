@@ -34,6 +34,7 @@ class OshaFop(PloneSandboxLayer):
         # Login as manager and create test content
         setRoles(portal, TEST_USER_ID, ['Manager'])
         login(portal, TEST_USER_NAME)
+        portal.invokeFactory("Folder", "folder")
         portal.invokeFactory("Folder", "en")
         portal.en.invokeFactory("Folder", "belgium")
         portal.en.belgium.invokeFactory("Document", "index_html")
