@@ -69,6 +69,7 @@
         </div>
 
         <table id="agency-resources-box"
+               summary="Agency's resources"
                i18n:attributes="summary heading_agencys_resources">
           <thead>
             <tr>
