@@ -11,11 +11,12 @@ from plone.app.portlets.portlets import base
 from osha.adaptation.subtyper import IAnnotatedLinkList
 from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
 
+
 class IFOPLinksPortlet(IPortletDataProvider):
     pass
 
-class Assignment(base.Assignment):
 
+class Assignment(base.Assignment):
     implements(IFOPLinksPortlet)
 
     def __init__(self):
@@ -27,7 +28,6 @@ class Assignment(base.Assignment):
 
 
 class Renderer(base.Renderer):
-
     _template = ViewPageTemplateFile('fop_links.pt')
 
     def link_sections(self):
@@ -40,11 +40,9 @@ class Renderer(base.Renderer):
             }
         link_section_dict = {}
         preflang = getToolByName(
-            self.context, 'portal_languages'
-            ).getPreferredLanguage()
+            self.context, 'portal_languages').getPreferredLanguage()
         section_ids = dict(
-            AnnotatableLinkListVocabulary().getDisplayList().items()
-            )
+            AnnotatableLinkListVocabulary().getDisplayList().items())
 
         for id in section_ids.keys():
             msgid = sectionid2msgid_map[id]
@@ -59,7 +57,8 @@ class Renderer(base.Renderer):
         return link_section_dict
 
     def _render_cachekey(method, self):
-        preflang = getToolByName(self.context, 'portal_languages').getPreferredLanguage()
+        preflang = getToolByName(
+            self.context, 'portal_languages').getPreferredLanguage()
         return (preflang)
 
     # @ram.cache(_render_cachekey)
