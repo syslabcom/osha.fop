@@ -30,6 +30,10 @@ class Assignment(base.Assignment):
 class Renderer(base.Renderer):
     _template = ViewPageTemplateFile('fop_links.pt')
 
+    def __init__(self, *args):
+        base.Renderer.__init__(self, *args)
+        context = self.context
+
     def link_sections(self):
         sectionid2msgid_map = {
             "authorities": "heading_authorities",
@@ -66,24 +70,31 @@ class Renderer(base.Renderer):
     def render(self):
         return self._template()
 
+    def get_links(self, obj):
+        if IAnnotatedLinkList.providedBy(obj):
+            return obj.annotatedlinklist
+
+    @property
+    def links(self):
+        links = self.get_links(self.context)
+        # Use en links as fallback: #5617
+        if links == ():
+            links = self.get_links(self.context.getTranslation("en"))
+        return links
+
+    @property
     def has_links(self):
-        """ Check if this page has been subtyped to provide annotated
-        links """
-        context = self.context
-        return IAnnotatedLinkList.providedBy(context) and \
-            context.Schema().getField('annotatedlinklist').get(context)
+        if self.links != ():
+            return True
 
     def get_links_by_section(self, section):
         context = self.context
-        if IAnnotatedLinkList.providedBy(self.context):
-            links = context.Schema().getField('annotatedlinklist').get(context)
-            return [i for i in links if i["section"] == section]
+        if self.has_links:
+            return [i for i in self.links if i["section"] == section]
         else:
             return None
 
-    def __init__(self, *args):
-        base.Renderer.__init__(self, *args)
-        context = self.context
+
 
 class AddForm(base.AddForm):
     """Portlet add form.
@@ -96,6 +107,7 @@ class AddForm(base.AddForm):
 
     def create(self, data):
         return Assignment(**data)
+
 
 class EditForm(base.EditForm):
     """Portlet edit form.

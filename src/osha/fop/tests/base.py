@@ -1,3 +1,5 @@
+from zope.interface import alsoProvides
+
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
@@ -9,6 +11,8 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import applyProfile
 from plone.app.testing import quickInstallProduct
 from plone.testing import z2
+
+from osha.adaptation.subtyper import IAnnotatedLinkList
 
 
 class OshaFop(PloneSandboxLayer):
@@ -36,9 +40,21 @@ class OshaFop(PloneSandboxLayer):
         login(portal, TEST_USER_NAME)
         portal.invokeFactory("Folder", "folder")
         portal.invokeFactory("Folder", "en")
+
+        # Add and configure a FOP
         portal.en.invokeFactory("Folder", "belgium")
         portal.en.belgium.invokeFactory("Document", "index_html")
-        portal.en.belgium.index_html.setLayout('oshnetwork-member-view')
+        be_fop = portal.en.belgium.index_html
+        be_fop.setLayout('oshnetwork-member-view')
+        alsoProvides(be_fop, IAnnotatedLinkList)
+        be_fop.annotatedlinklist = ({
+                'url': 'http://www.employment.belgium.be/',
+                'section': 'authorities',
+                'linktext': 'Link Text',
+                'title': 'Link Title'},)
+        be_fop.addTranslation("de")
+        alsoProvides(portal.en.belgium["index_html-de"], IAnnotatedLinkList)
+
 
     def tearDownZope(self, app):
         z2.uninstallProduct(app, 'osha.fop')

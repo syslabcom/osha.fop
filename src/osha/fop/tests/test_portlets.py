@@ -55,18 +55,28 @@ class TestFopLinksPortlet(unittest.TestCase):
         editview = getMultiAdapter((mapping['foo'], request), name='edit')
         self.failUnless(isinstance(editview, fop_links.EditForm))
 
-    def test_obtain_renderer(self):
-        context = self.folder
-        request = self.folder.REQUEST
-        view = self.folder.restrictedTraverse('@@plone')
-        manager = getUtility(IPortletManager, name='plone.rightcolumn',
-                             context=self.portal)
-
+    def get_renderer(self, obj):
+        request = obj.REQUEST
+        view = obj.restrictedTraverse('@@oshnetwork-member-view')
+        manager = getUtility(
+            IPortletManager, name='plone.rightcolumn', context=obj)
         assignment = fop_links.Assignment()
 
-        renderer = getMultiAdapter(
-            (context, request, view, manager, assignment), IPortletRenderer)
+        return getMultiAdapter(
+            (obj, request, view, manager, assignment), IPortletRenderer)
+
+    def test_obtain_renderer(self):
+        renderer = self.get_renderer(self.portal.en.belgium.index_html)
         self.failUnless(isinstance(renderer, fop_links.Renderer))
+
+    def test_fallback_links(self):
+        fop_en = self.portal.en.belgium.index_html
+        fop_de = self.portal.en.belgium["index_html-de"]
+        fop_en_portlet = self.get_renderer(fop_en)
+        fop_de_portlet = self.get_renderer(fop_de)
+        self.assertEqual(fop_de.annotatedlinklist, ())
+        self.assertNotEqual(fop_en.annotatedlinklist, ())
+        self.assertEqual(fop_de_portlet.links, fop_en.annotatedlinklist)
 
 
 def test_suite():
@@ -74,3 +84,4 @@ def test_suite():
     the class(es) above.
     """
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
+
