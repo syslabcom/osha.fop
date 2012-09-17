@@ -1,6 +1,12 @@
 osha.fop Changelog
 ==================
 
+1.3.1 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 1.3 (2012-09-17)
 ----------------
 
