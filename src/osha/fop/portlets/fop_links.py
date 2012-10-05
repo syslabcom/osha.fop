@@ -78,13 +78,13 @@ class Renderer(base.Renderer):
     def links(self):
         links = self.get_links(self.context)
         # Use en links as fallback: #5617
-        if links == ():
+        if links == () or links is None:
             links = self.get_links(self.context.getTranslation("en"))
         return links
 
     @property
     def has_links(self):
-        if self.links != ():
+        if self.links != () and self.links is not None:
             return True
 
     def get_links_by_section(self, section):
